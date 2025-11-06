@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inspirational Quotes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Inspirational Quotes</h1>
+        <p>Get inspired or add your own quote!</p>
+
+        <div>
+            <button onclick="getQuote()">Get Random Quote</button>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <input id="newQuote" type="text" placeholder="Enter your own quote here">
+            <button onclick="addQuote()">Add Quote</button>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <input id="quoteId" type="number" placeholder="Quote ID to edit" min="1">
+            <input id="editQuote" type="text" placeholder="New quote text">
+            <button onclick="updateQuote()">Edit Quote</button>
+        </div>
+
+        <div id="quoteDisplay"></div>
+    </div>
+
+    <script>
+        function getQuote() {
+            fetch("/api/quote")
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("quoteDisplay").innerHTML =
+                        `"${data.quote}"`;
+                });
+        }
+
+        function addQuote() {
+            const quoteText = document.getElementById("newQuote").value;
+            if (!quoteText) return alert("Please enter a quote!");
+
+            fetch("/api/quote", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ quote: quoteText })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                document.getElementById("newQuote").value = "";
+            });
+        }
+
+        function updateQuote() {
+            const id = document.getElementById("quoteId").value;
+            const newText = document.getElementById("editQuote").value;
+
+            if (!id || !newText) return alert("Please fill in both fields!");
+
+            fetch(`/api/quote/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ quote: newText })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message || data.error);
+                document.getElementById("quoteId").value = "";
+                document.getElementById("editQuote").value = "";
+            });
+        }
+    </script>
+</body>
+</html>
