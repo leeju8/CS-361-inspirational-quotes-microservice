@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request
 import random, json, os
 
 app = Flask(__name__)
@@ -14,10 +14,6 @@ def load_quotes():
 def save_quotes(quotes):
     with open(DATA_FILE, "w") as f:
         json.dump(quotes, f, indent=4)
-
-@app.route("/")
-def home():
-    return render_template("index.html")
 
 # GET random quote
 @app.route("/api/quote", methods=["GET"])

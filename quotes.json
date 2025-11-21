@@ -1,18 +1,18 @@
 [
-    {
-        "id": 1,
-        "quote": "Believe you can and you're halfway there."
-    },
-    {
-        "id": 2,
-        "quote": "It always seems impossible until it’s done."
-    },
-    {
-        "id": 3,
-        "quote": "Don’t watch the clock; do what it does. Keep going."
-    },
-    {
-        "id": 4,
-        "quote": "The future belongs to those who believe in the beauty of their dreams."
-    }
+  {
+    "id": 1,
+    "quote": "Believe you can and you're halfway there."
+  },
+  {
+    "id": 2,
+    "quote": "It always seems impossible until it\u2019s done."
+  },
+  {
+    "id": 3,
+    "quote": "Don\u2019t watch the clock; do what it does. Keep going."
+  },
+  {
+    "id": 4,
+    "quote": "The future belongs to those who believe in the beauty of their dreams."
+  }
 ]
