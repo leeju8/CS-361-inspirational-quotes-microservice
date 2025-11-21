@@ -117,3 +117,5 @@ curl -X PUT http://localhost:5000/api/quote/2 \
 ```
 
 # UML Sequence Diagram
+
+<img width="441" height="416" alt="image" src="https://github.com/user-attachments/assets/8b3eb1a8-aae1-48a5-babd-8734488086a3" />
