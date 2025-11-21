@@ -20,8 +20,8 @@ def save_quotes(quotes):
 def get_quote():
     quotes = load_quotes()
     if not quotes:
-        return jsonify({"quote": "No quotes available."})
-    return jsonify(random.choice(quotes))
+        return jsonify({"id": 0, "quote": "No quotes available."}), 404
+    return jsonify(random.choice(quotes)), 200
 
 # POST new quote
 @app.route("/api/quote", methods=["POST"])
@@ -41,15 +41,13 @@ def add_quote():
 @app.route("/api/quote/<int:quote_id>", methods=["PUT"])
 def update_quote(quote_id):
     data = request.get_json()
-    if not data or "quote" not in data:
-        return jsonify({"error": "Missing 'quote' field"}), 400
 
     quotes = load_quotes()
     for q in quotes:
         if q["id"] == quote_id:
             q["quote"] = data["quote"]
             save_quotes(quotes)
-            return jsonify({"message": "Quote updated!", "quote": q})
+            return jsonify({"message": "Quote updated!", "quote": q}), 200
 
     return jsonify({"error": "Quote not found"}), 404
 
