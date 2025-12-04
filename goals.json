@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "goal": "Complete the microservices integration project",
+        "completed": false
+    },
+    {
+        "id": 2,
+        "goal": "Learn Flask REST API development",
+        "completed": true
+    },
+    {
+        "id": 3,
+        "goal": "do the dishes",
+        "completed": false
+    },
+    {
+        "id": 4,
+        "goal": "get 7 hours of sleep",
+        "completed": true
+    }
+]

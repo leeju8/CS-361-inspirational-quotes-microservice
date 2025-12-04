@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import List, Optional
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 import json, random
 
 app = Flask(__name__)
@@ -61,6 +61,16 @@ def parse_quote_payload() -> str:
         raise ValueError("Request JSON must include a non-empty 'quote' field.")
     return quote_text
 
+# Root route - serves HTML page
+@app.route("/", methods=["GET"])
+def root():
+    return render_template("index.html")
+
+# Health check endpoint
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({"service": "Inspirational Quotes", "status": "running", "endpoints": ["/api/quote"]}), 200
+
 # GET random quote
 @app.route("/api/quote", methods=["GET"])
 def get_quote():
@@ -98,4 +108,4 @@ def update_quote(quote_id):
     return jsonify({"message": "Quote updated!", "quote": updated_quote}), 200
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
